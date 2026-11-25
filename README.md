@@ -54,7 +54,8 @@ AI-Terminal-Assistant/
 │   ├── semantic_engine.py      # Sentence Transformers + Fallback
 │   ├── command_generator.py    # Controlled PowerShell template builder
 │   ├── command_validator.py    # Allowlist & safety checks
-│   └── executor.py             # Controlled subprocess execution
+│   ├── executor.py             # Controlled subprocess execution
+│   └── project_detector.py     # Read-only software project & technology detector
 │
 ├── utils/
 │   ├── __init__.py
@@ -72,7 +73,8 @@ AI-Terminal-Assistant/
 │   ├── test_command_generator.py# PowerShell command generation & safety tests (37 tests)
 │   ├── test_command_validator.py# Security validation & path safety tests (18 tests)
 │   ├── test_executor.py         # Controlled execution & safety tests (34 tests)
-│   └── test_terminal_integration.py # End-to-end integration & UI tests (18 tests)
+│   ├── test_terminal_integration.py # End-to-end integration & UI tests (18 tests)
+│   └── test_project_detector.py # Project detection & technology tests (25 tests)
 │
 └── scripts/
     ├── train_model.py          # Model training, evaluation & verification pipeline
@@ -283,7 +285,7 @@ python app.py --query "check python version"
 python app.py --query "list all files"
 ```
 
-### 4. Run the Complete Test Suite (184 Passed, 1 Skipped Across All 9 Phases)
+### 4. Run the Complete Test Suite (208 Passed, 2 Skipped Across All 10 Phases)
 ```powershell
 python -m pytest tests/ -v
 ```
