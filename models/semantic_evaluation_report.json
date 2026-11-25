@@ -1,0 +1,1243 @@
+{
+  "summary": {
+    "timestamp": "2026-11-25T23:09:28.655518",
+    "n_samples": 36,
+    "n_classes": 12,
+    "models": {
+      "SentenceTransformer (Dense)": {
+        "top1_accuracy": 0.9444,
+        "top3_accuracy": 1.0,
+        "mean_latency_ms": 13.7,
+        "p95_latency_ms": 16.48
+      },
+      "TF-IDF Cosine (Fallback)": {
+        "top1_accuracy": 0.5556,
+        "top3_accuracy": 0.9444,
+        "mean_latency_ms": 2.56,
+        "p95_latency_ms": 2.87
+      },
+      "Logistic Regression (Baseline Classifier)": {
+        "top1_accuracy": 0.0833,
+        "top3_accuracy": 0.2778,
+        "mean_latency_ms": 1.29,
+        "p95_latency_ms": 1.61
+      },
+      "Hybrid Model (Classifier + Semantic Engine)": {
+        "top1_accuracy": 0.9167,
+        "top3_accuracy": 1.0,
+        "mean_latency_ms": 14.62,
+        "p95_latency_ms": 18.48
+      }
+    },
+    "per_intent_breakdown": {
+      "LIST_FILES": {
+        "total": 3,
+        "dense_correct": 2,
+        "fallback_correct": 2,
+        "classifier_correct": 0,
+        "hybrid_correct": 2
+      },
+      "CREATE_DIRECTORY": {
+        "total": 3,
+        "dense_correct": 3,
+        "fallback_correct": 3,
+        "classifier_correct": 0,
+        "hybrid_correct": 3
+      },
+      "DELETE_FILE": {
+        "total": 3,
+        "dense_correct": 3,
+        "fallback_correct": 1,
+        "classifier_correct": 0,
+        "hybrid_correct": 3
+      },
+      "SEARCH_FILES": {
+        "total": 3,
+        "dense_correct": 3,
+        "fallback_correct": 1,
+        "classifier_correct": 0,
+        "hybrid_correct": 3
+      },
+      "CHECK_VERSION": {
+        "total": 3,
+        "dense_correct": 3,
+        "fallback_correct": 1,
+        "classifier_correct": 0,
+        "hybrid_correct": 3
+      },
+      "CURRENT_DIRECTORY": {
+        "total": 3,
+        "dense_correct": 3,
+        "fallback_correct": 1,
+        "classifier_correct": 0,
+        "hybrid_correct": 3
+      },
+      "MOVE_FILE": {
+        "total": 3,
+        "dense_correct": 3,
+        "fallback_correct": 1,
+        "classifier_correct": 0,
+        "hybrid_correct": 2
+      },
+      "COPY_FILE": {
+        "total": 3,
+        "dense_correct": 2,
+        "fallback_correct": 1,
+        "classifier_correct": 0,
+        "hybrid_correct": 2
+      },
+      "SYSTEM_INFO": {
+        "total": 3,
+        "dense_correct": 3,
+        "fallback_correct": 1,
+        "classifier_correct": 0,
+        "hybrid_correct": 3
+      },
+      "NETWORK_INFO": {
+        "total": 3,
+        "dense_correct": 3,
+        "fallback_correct": 3,
+        "classifier_correct": 0,
+        "hybrid_correct": 3
+      },
+      "CREATE_FILE": {
+        "total": 3,
+        "dense_correct": 3,
+        "fallback_correct": 2,
+        "classifier_correct": 0,
+        "hybrid_correct": 3
+      },
+      "UNKNOWN": {
+        "total": 3,
+        "dense_correct": 3,
+        "fallback_correct": 3,
+        "classifier_correct": 3,
+        "hybrid_correct": 3
+      }
+    }
+  },
+  "dense_predictions": [
+    {
+      "query": "display everything in the present directory",
+      "true_intent": "LIST_FILES",
+      "predicted": "CURRENT_DIRECTORY",
+      "score": 0.7354,
+      "is_correct": false
+    },
+    {
+      "query": "what items are saved in this folder?",
+      "true_intent": "LIST_FILES",
+      "predicted": "LIST_FILES",
+      "score": 0.7369,
+      "is_correct": true
+    },
+    {
+      "query": "show all contents of this directory",
+      "true_intent": "LIST_FILES",
+      "predicted": "LIST_FILES",
+      "score": 0.8065,
+      "is_correct": true
+    },
+    {
+      "query": "make a brand new folder called Archives",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "CREATE_DIRECTORY",
+      "score": 0.6912,
+      "is_correct": true
+    },
+    {
+      "query": "build a new directory named Assets",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "CREATE_DIRECTORY",
+      "score": 0.7235,
+      "is_correct": true
+    },
+    {
+      "query": "set up a new folder for logs",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "CREATE_DIRECTORY",
+      "score": 0.7133,
+      "is_correct": true
+    },
+    {
+      "query": "erase test.log immediately",
+      "true_intent": "DELETE_FILE",
+      "predicted": "DELETE_FILE",
+      "score": 0.7536,
+      "is_correct": true
+    },
+    {
+      "query": "get rid of the file summary.docx",
+      "true_intent": "DELETE_FILE",
+      "predicted": "DELETE_FILE",
+      "score": 0.8131,
+      "is_correct": true
+    },
+    {
+      "query": "discard the document memo.txt",
+      "true_intent": "DELETE_FILE",
+      "predicted": "DELETE_FILE",
+      "score": 0.5725,
+      "is_correct": true
+    },
+    {
+      "query": "locate every text file inside here",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "SEARCH_FILES",
+      "score": 0.7425,
+      "is_correct": true
+    },
+    {
+      "query": "find where report.pdf is saved",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "SEARCH_FILES",
+      "score": 0.6264,
+      "is_correct": true
+    },
+    {
+      "query": "hunt down any python scripts in this project",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "SEARCH_FILES",
+      "score": 0.5567,
+      "is_correct": true
+    },
+    {
+      "query": "what release of Python is currently active?",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "CHECK_VERSION",
+      "score": 0.7148,
+      "is_correct": true
+    },
+    {
+      "query": "which git build is running?",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "CHECK_VERSION",
+      "score": 0.7118,
+      "is_correct": true
+    },
+    {
+      "query": "display installed node runtime version",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "CHECK_VERSION",
+      "score": 0.775,
+      "is_correct": true
+    },
+    {
+      "query": "which folder am I currently standing in?",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "CURRENT_DIRECTORY",
+      "score": 0.8128,
+      "is_correct": true
+    },
+    {
+      "query": "what is my active working directory path?",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "CURRENT_DIRECTORY",
+      "score": 0.7585,
+      "is_correct": true
+    },
+    {
+      "query": "tell me the path I am currently inside",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "CURRENT_DIRECTORY",
+      "score": 0.6334,
+      "is_correct": true
+    },
+    {
+      "query": "transfer data.csv into the backup folder",
+      "true_intent": "MOVE_FILE",
+      "predicted": "MOVE_FILE",
+      "score": 0.7094,
+      "is_correct": true
+    },
+    {
+      "query": "relocate document.pdf to C:\\Archive",
+      "true_intent": "MOVE_FILE",
+      "predicted": "MOVE_FILE",
+      "score": 0.6434,
+      "is_correct": true
+    },
+    {
+      "query": "shift project.zip over to the external drive",
+      "true_intent": "MOVE_FILE",
+      "predicted": "MOVE_FILE",
+      "score": 0.439,
+      "is_correct": true
+    },
+    {
+      "query": "make a duplicate of config.json in backups",
+      "true_intent": "COPY_FILE",
+      "predicted": "COPY_FILE",
+      "score": 0.5969,
+      "is_correct": true
+    },
+    {
+      "query": "clone test.py into the temp folder",
+      "true_intent": "COPY_FILE",
+      "predicted": "COPY_FILE",
+      "score": 0.682,
+      "is_correct": true
+    },
+    {
+      "query": "replicate notes.txt to old_notes.txt",
+      "true_intent": "COPY_FILE",
+      "predicted": "CREATE_FILE",
+      "score": 0.6342,
+      "is_correct": false
+    },
+    {
+      "query": "show me my operating system information",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "SYSTEM_INFO",
+      "score": 0.8176,
+      "is_correct": true
+    },
+    {
+      "query": "display hardware resources and memory stats",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "SYSTEM_INFO",
+      "score": 0.7244,
+      "is_correct": true
+    },
+    {
+      "query": "how much RAM and CPU is currently active?",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "SYSTEM_INFO",
+      "score": 0.5648,
+      "is_correct": true
+    },
+    {
+      "query": "what is my local network IP configuration?",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "NETWORK_INFO",
+      "score": 0.6983,
+      "is_correct": true
+    },
+    {
+      "query": "display active network adapters and addresses",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "NETWORK_INFO",
+      "score": 0.7686,
+      "is_correct": true
+    },
+    {
+      "query": "show open network sockets and connections",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "NETWORK_INFO",
+      "score": 0.653,
+      "is_correct": true
+    },
+    {
+      "query": "generate an empty file named output.log",
+      "true_intent": "CREATE_FILE",
+      "predicted": "CREATE_FILE",
+      "score": 0.6662,
+      "is_correct": true
+    },
+    {
+      "query": "touch a new file called notes.txt",
+      "true_intent": "CREATE_FILE",
+      "predicted": "CREATE_FILE",
+      "score": 0.746,
+      "is_correct": true
+    },
+    {
+      "query": "craft a new blank document script.py",
+      "true_intent": "CREATE_FILE",
+      "predicted": "CREATE_FILE",
+      "score": 0.5836,
+      "is_correct": true
+    },
+    {
+      "query": "tell me a funny programming joke",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "score": 0.5112,
+      "is_correct": true
+    },
+    {
+      "query": "play some relaxing background music",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "score": 0.4012,
+      "is_correct": true
+    },
+    {
+      "query": "order a pepperoni pizza for dinner tonight",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "score": 0.2398,
+      "is_correct": true
+    }
+  ],
+  "fallback_predictions": [
+    {
+      "query": "display everything in the present directory",
+      "true_intent": "LIST_FILES",
+      "predicted": "CURRENT_DIRECTORY",
+      "score": 0.4606,
+      "is_correct": false
+    },
+    {
+      "query": "what items are saved in this folder?",
+      "true_intent": "LIST_FILES",
+      "predicted": "LIST_FILES",
+      "score": 0.3814,
+      "is_correct": true
+    },
+    {
+      "query": "show all contents of this directory",
+      "true_intent": "LIST_FILES",
+      "predicted": "LIST_FILES",
+      "score": 0.4168,
+      "is_correct": true
+    },
+    {
+      "query": "make a brand new folder called Archives",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "CREATE_DIRECTORY",
+      "score": 0.5552,
+      "is_correct": true
+    },
+    {
+      "query": "build a new directory named Assets",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "CREATE_DIRECTORY",
+      "score": 0.5163,
+      "is_correct": true
+    },
+    {
+      "query": "set up a new folder for logs",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "CREATE_DIRECTORY",
+      "score": 0.3606,
+      "is_correct": true
+    },
+    {
+      "query": "erase test.log immediately",
+      "true_intent": "DELETE_FILE",
+      "predicted": "UNKNOWN",
+      "score": 0.3446,
+      "is_correct": false
+    },
+    {
+      "query": "get rid of the file summary.docx",
+      "true_intent": "DELETE_FILE",
+      "predicted": "DELETE_FILE",
+      "score": 0.5186,
+      "is_correct": true
+    },
+    {
+      "query": "discard the document memo.txt",
+      "true_intent": "DELETE_FILE",
+      "predicted": "CREATE_FILE",
+      "score": 0.3607,
+      "is_correct": false
+    },
+    {
+      "query": "locate every text file inside here",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "SEARCH_FILES",
+      "score": 0.5928,
+      "is_correct": true
+    },
+    {
+      "query": "find where report.pdf is saved",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "UNKNOWN",
+      "score": 0.2557,
+      "is_correct": false
+    },
+    {
+      "query": "hunt down any python scripts in this project",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "UNKNOWN",
+      "score": 0.291,
+      "is_correct": false
+    },
+    {
+      "query": "what release of Python is currently active?",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "UNKNOWN",
+      "score": 0.2793,
+      "is_correct": false
+    },
+    {
+      "query": "which git build is running?",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "UNKNOWN",
+      "score": 0.2472,
+      "is_correct": false
+    },
+    {
+      "query": "display installed node runtime version",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "CHECK_VERSION",
+      "score": 0.4782,
+      "is_correct": true
+    },
+    {
+      "query": "which folder am I currently standing in?",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "UNKNOWN",
+      "score": 0.2769,
+      "is_correct": false
+    },
+    {
+      "query": "what is my active working directory path?",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "CURRENT_DIRECTORY",
+      "score": 0.5488,
+      "is_correct": true
+    },
+    {
+      "query": "tell me the path I am currently inside",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "UNKNOWN",
+      "score": 0.2684,
+      "is_correct": false
+    },
+    {
+      "query": "transfer data.csv into the backup folder",
+      "true_intent": "MOVE_FILE",
+      "predicted": "UNKNOWN",
+      "score": 0.2414,
+      "is_correct": false
+    },
+    {
+      "query": "relocate document.pdf to C:\\Archive",
+      "true_intent": "MOVE_FILE",
+      "predicted": "UNKNOWN",
+      "score": 0.304,
+      "is_correct": false
+    },
+    {
+      "query": "shift project.zip over to the external drive",
+      "true_intent": "MOVE_FILE",
+      "predicted": "MOVE_FILE",
+      "score": 0.3999,
+      "is_correct": true
+    },
+    {
+      "query": "make a duplicate of config.json in backups",
+      "true_intent": "COPY_FILE",
+      "predicted": "COPY_FILE",
+      "score": 0.3692,
+      "is_correct": true
+    },
+    {
+      "query": "clone test.py into the temp folder",
+      "true_intent": "COPY_FILE",
+      "predicted": "UNKNOWN",
+      "score": 0.2507,
+      "is_correct": false
+    },
+    {
+      "query": "replicate notes.txt to old_notes.txt",
+      "true_intent": "COPY_FILE",
+      "predicted": "UNKNOWN",
+      "score": 0.1887,
+      "is_correct": false
+    },
+    {
+      "query": "show me my operating system information",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "SYSTEM_INFO",
+      "score": 0.4549,
+      "is_correct": true
+    },
+    {
+      "query": "display hardware resources and memory stats",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "UNKNOWN",
+      "score": 0.2528,
+      "is_correct": false
+    },
+    {
+      "query": "how much RAM and CPU is currently active?",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "UNKNOWN",
+      "score": 0.2563,
+      "is_correct": false
+    },
+    {
+      "query": "what is my local network IP configuration?",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "NETWORK_INFO",
+      "score": 0.4989,
+      "is_correct": true
+    },
+    {
+      "query": "display active network adapters and addresses",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "NETWORK_INFO",
+      "score": 0.4672,
+      "is_correct": true
+    },
+    {
+      "query": "show open network sockets and connections",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "NETWORK_INFO",
+      "score": 0.4538,
+      "is_correct": true
+    },
+    {
+      "query": "generate an empty file named output.log",
+      "true_intent": "CREATE_FILE",
+      "predicted": "CREATE_FILE",
+      "score": 0.495,
+      "is_correct": true
+    },
+    {
+      "query": "touch a new file called notes.txt",
+      "true_intent": "CREATE_FILE",
+      "predicted": "CREATE_FILE",
+      "score": 0.4463,
+      "is_correct": true
+    },
+    {
+      "query": "craft a new blank document script.py",
+      "true_intent": "CREATE_FILE",
+      "predicted": "UNKNOWN",
+      "score": 0.2516,
+      "is_correct": false
+    },
+    {
+      "query": "tell me a funny programming joke",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "score": 0.5174,
+      "is_correct": true
+    },
+    {
+      "query": "play some relaxing background music",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "score": 0.4082,
+      "is_correct": true
+    },
+    {
+      "query": "order a pepperoni pizza for dinner tonight",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "score": 0.0,
+      "is_correct": true
+    }
+  ],
+  "classifier_predictions": [
+    {
+      "query": "display everything in the present directory",
+      "true_intent": "LIST_FILES",
+      "predicted": "UNKNOWN",
+      "confidence": 0.2024,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "what items are saved in this folder?",
+      "true_intent": "LIST_FILES",
+      "predicted": "UNKNOWN",
+      "confidence": 0.212,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "show all contents of this directory",
+      "true_intent": "LIST_FILES",
+      "predicted": "UNKNOWN",
+      "confidence": 0.2111,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "make a brand new folder called Archives",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "UNKNOWN",
+      "confidence": 0.369,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "build a new directory named Assets",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "UNKNOWN",
+      "confidence": 0.2842,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "set up a new folder for logs",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "UNKNOWN",
+      "confidence": 0.2523,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "erase test.log immediately",
+      "true_intent": "DELETE_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1501,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "get rid of the file summary.docx",
+      "true_intent": "DELETE_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1959,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "discard the document memo.txt",
+      "true_intent": "DELETE_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1137,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "locate every text file inside here",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "UNKNOWN",
+      "confidence": 0.2599,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "find where report.pdf is saved",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "UNKNOWN",
+      "confidence": 0.2291,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "hunt down any python scripts in this project",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1242,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "what release of Python is currently active?",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1801,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "which git build is running?",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1292,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "display installed node runtime version",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "UNKNOWN",
+      "confidence": 0.3571,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "which folder am I currently standing in?",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1361,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "what is my active working directory path?",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "UNKNOWN",
+      "confidence": 0.4186,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "tell me the path I am currently inside",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1946,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "transfer data.csv into the backup folder",
+      "true_intent": "MOVE_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1369,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "relocate document.pdf to C:\\Archive",
+      "true_intent": "MOVE_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1644,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "shift project.zip over to the external drive",
+      "true_intent": "MOVE_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.2566,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "make a duplicate of config.json in backups",
+      "true_intent": "COPY_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.2296,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "clone test.py into the temp folder",
+      "true_intent": "COPY_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1264,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "replicate notes.txt to old_notes.txt",
+      "true_intent": "COPY_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1641,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "show me my operating system information",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "UNKNOWN",
+      "confidence": 0.3822,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "display hardware resources and memory stats",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1804,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "how much RAM and CPU is currently active?",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1466,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "what is my local network IP configuration?",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "UNKNOWN",
+      "confidence": 0.3796,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "display active network adapters and addresses",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "UNKNOWN",
+      "confidence": 0.3691,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "show open network sockets and connections",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "UNKNOWN",
+      "confidence": 0.3391,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "generate an empty file named output.log",
+      "true_intent": "CREATE_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.33,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "touch a new file called notes.txt",
+      "true_intent": "CREATE_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.3278,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "craft a new blank document script.py",
+      "true_intent": "CREATE_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1587,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "tell me a funny programming joke",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "confidence": 0.213,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": true
+    },
+    {
+      "query": "play some relaxing background music",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "confidence": 0.1922,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": true
+    },
+    {
+      "query": "order a pepperoni pizza for dinner tonight",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "confidence": 0.106,
+      "status": "LOW_CONFIDENCE",
+      "is_correct": true
+    }
+  ],
+  "hybrid_predictions": [
+    {
+      "query": "display everything in the present directory",
+      "true_intent": "LIST_FILES",
+      "predicted": "CURRENT_DIRECTORY",
+      "confidence": 0.7354,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": false
+    },
+    {
+      "query": "what items are saved in this folder?",
+      "true_intent": "LIST_FILES",
+      "predicted": "LIST_FILES",
+      "confidence": 0.7369,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "show all contents of this directory",
+      "true_intent": "LIST_FILES",
+      "predicted": "LIST_FILES",
+      "confidence": 0.8065,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "make a brand new folder called Archives",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "CREATE_DIRECTORY",
+      "confidence": 0.6912,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "build a new directory named Assets",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "CREATE_DIRECTORY",
+      "confidence": 0.7235,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "set up a new folder for logs",
+      "true_intent": "CREATE_DIRECTORY",
+      "predicted": "CREATE_DIRECTORY",
+      "confidence": 0.7133,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "erase test.log immediately",
+      "true_intent": "DELETE_FILE",
+      "predicted": "DELETE_FILE",
+      "confidence": 0.7536,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "get rid of the file summary.docx",
+      "true_intent": "DELETE_FILE",
+      "predicted": "DELETE_FILE",
+      "confidence": 0.8131,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "discard the document memo.txt",
+      "true_intent": "DELETE_FILE",
+      "predicted": "DELETE_FILE",
+      "confidence": 0.5725,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "locate every text file inside here",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "SEARCH_FILES",
+      "confidence": 0.7425,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "find where report.pdf is saved",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "SEARCH_FILES",
+      "confidence": 0.6264,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "hunt down any python scripts in this project",
+      "true_intent": "SEARCH_FILES",
+      "predicted": "SEARCH_FILES",
+      "confidence": 0.5567,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "what release of Python is currently active?",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "CHECK_VERSION",
+      "confidence": 0.7148,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "which git build is running?",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "CHECK_VERSION",
+      "confidence": 0.7118,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "display installed node runtime version",
+      "true_intent": "CHECK_VERSION",
+      "predicted": "CHECK_VERSION",
+      "confidence": 0.775,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "which folder am I currently standing in?",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "CURRENT_DIRECTORY",
+      "confidence": 0.8128,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "what is my active working directory path?",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "CURRENT_DIRECTORY",
+      "confidence": 0.7585,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "tell me the path I am currently inside",
+      "true_intent": "CURRENT_DIRECTORY",
+      "predicted": "CURRENT_DIRECTORY",
+      "confidence": 0.6334,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "transfer data.csv into the backup folder",
+      "true_intent": "MOVE_FILE",
+      "predicted": "MOVE_FILE",
+      "confidence": 0.7094,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "relocate document.pdf to C:\\Archive",
+      "true_intent": "MOVE_FILE",
+      "predicted": "MOVE_FILE",
+      "confidence": 0.6434,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "shift project.zip over to the external drive",
+      "true_intent": "MOVE_FILE",
+      "predicted": "UNKNOWN",
+      "confidence": 0.439,
+      "source": "FALLBACK",
+      "status": "LOW_CONFIDENCE",
+      "is_correct": false
+    },
+    {
+      "query": "make a duplicate of config.json in backups",
+      "true_intent": "COPY_FILE",
+      "predicted": "COPY_FILE",
+      "confidence": 0.5969,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "clone test.py into the temp folder",
+      "true_intent": "COPY_FILE",
+      "predicted": "COPY_FILE",
+      "confidence": 0.682,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "replicate notes.txt to old_notes.txt",
+      "true_intent": "COPY_FILE",
+      "predicted": "CREATE_FILE",
+      "confidence": 0.6342,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": false
+    },
+    {
+      "query": "show me my operating system information",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "SYSTEM_INFO",
+      "confidence": 0.8176,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "display hardware resources and memory stats",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "SYSTEM_INFO",
+      "confidence": 0.7244,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "how much RAM and CPU is currently active?",
+      "true_intent": "SYSTEM_INFO",
+      "predicted": "SYSTEM_INFO",
+      "confidence": 0.5648,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "what is my local network IP configuration?",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "NETWORK_INFO",
+      "confidence": 0.6983,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "display active network adapters and addresses",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "NETWORK_INFO",
+      "confidence": 0.7686,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "show open network sockets and connections",
+      "true_intent": "NETWORK_INFO",
+      "predicted": "NETWORK_INFO",
+      "confidence": 0.653,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "generate an empty file named output.log",
+      "true_intent": "CREATE_FILE",
+      "predicted": "CREATE_FILE",
+      "confidence": 0.6662,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "touch a new file called notes.txt",
+      "true_intent": "CREATE_FILE",
+      "predicted": "CREATE_FILE",
+      "confidence": 0.746,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "craft a new blank document script.py",
+      "true_intent": "CREATE_FILE",
+      "predicted": "CREATE_FILE",
+      "confidence": 0.5836,
+      "source": "SEMANTIC_ENGINE",
+      "status": "BOOSTED",
+      "is_correct": true
+    },
+    {
+      "query": "tell me a funny programming joke",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "confidence": 0.5112,
+      "source": "FALLBACK",
+      "status": "LOW_CONFIDENCE",
+      "is_correct": true
+    },
+    {
+      "query": "play some relaxing background music",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "confidence": 0.4012,
+      "source": "FALLBACK",
+      "status": "LOW_CONFIDENCE",
+      "is_correct": true
+    },
+    {
+      "query": "order a pepperoni pizza for dinner tonight",
+      "true_intent": "UNKNOWN",
+      "predicted": "UNKNOWN",
+      "confidence": 0.2398,
+      "source": "FALLBACK",
+      "status": "LOW_CONFIDENCE",
+      "is_correct": true
+    }
+  ]
+}

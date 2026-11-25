@@ -1,0 +1,117 @@
+{
+  "timestamp": "2026-11-25T23:09:28.655518",
+  "n_samples": 36,
+  "n_classes": 12,
+  "models": {
+    "SentenceTransformer (Dense)": {
+      "top1_accuracy": 0.9444,
+      "top3_accuracy": 1.0,
+      "mean_latency_ms": 13.7,
+      "p95_latency_ms": 16.48
+    },
+    "TF-IDF Cosine (Fallback)": {
+      "top1_accuracy": 0.5556,
+      "top3_accuracy": 0.9444,
+      "mean_latency_ms": 2.56,
+      "p95_latency_ms": 2.87
+    },
+    "Logistic Regression (Baseline Classifier)": {
+      "top1_accuracy": 0.0833,
+      "top3_accuracy": 0.2778,
+      "mean_latency_ms": 1.29,
+      "p95_latency_ms": 1.61
+    },
+    "Hybrid Model (Classifier + Semantic Engine)": {
+      "top1_accuracy": 0.9167,
+      "top3_accuracy": 1.0,
+      "mean_latency_ms": 14.62,
+      "p95_latency_ms": 18.48
+    }
+  },
+  "per_intent_breakdown": {
+    "LIST_FILES": {
+      "total": 3,
+      "dense_correct": 2,
+      "fallback_correct": 2,
+      "classifier_correct": 0,
+      "hybrid_correct": 2
+    },
+    "CREATE_DIRECTORY": {
+      "total": 3,
+      "dense_correct": 3,
+      "fallback_correct": 3,
+      "classifier_correct": 0,
+      "hybrid_correct": 3
+    },
+    "DELETE_FILE": {
+      "total": 3,
+      "dense_correct": 3,
+      "fallback_correct": 1,
+      "classifier_correct": 0,
+      "hybrid_correct": 3
+    },
+    "SEARCH_FILES": {
+      "total": 3,
+      "dense_correct": 3,
+      "fallback_correct": 1,
+      "classifier_correct": 0,
+      "hybrid_correct": 3
+    },
+    "CHECK_VERSION": {
+      "total": 3,
+      "dense_correct": 3,
+      "fallback_correct": 1,
+      "classifier_correct": 0,
+      "hybrid_correct": 3
+    },
+    "CURRENT_DIRECTORY": {
+      "total": 3,
+      "dense_correct": 3,
+      "fallback_correct": 1,
+      "classifier_correct": 0,
+      "hybrid_correct": 3
+    },
+    "MOVE_FILE": {
+      "total": 3,
+      "dense_correct": 3,
+      "fallback_correct": 1,
+      "classifier_correct": 0,
+      "hybrid_correct": 2
+    },
+    "COPY_FILE": {
+      "total": 3,
+      "dense_correct": 2,
+      "fallback_correct": 1,
+      "classifier_correct": 0,
+      "hybrid_correct": 2
+    },
+    "SYSTEM_INFO": {
+      "total": 3,
+      "dense_correct": 3,
+      "fallback_correct": 1,
+      "classifier_correct": 0,
+      "hybrid_correct": 3
+    },
+    "NETWORK_INFO": {
+      "total": 3,
+      "dense_correct": 3,
+      "fallback_correct": 3,
+      "classifier_correct": 0,
+      "hybrid_correct": 3
+    },
+    "CREATE_FILE": {
+      "total": 3,
+      "dense_correct": 3,
+      "fallback_correct": 2,
+      "classifier_correct": 0,
+      "hybrid_correct": 3
+    },
+    "UNKNOWN": {
+      "total": 3,
+      "dense_correct": 3,
+      "fallback_correct": 3,
+      "classifier_correct": 3,
+      "hybrid_correct": 3
+    }
+  }
+}

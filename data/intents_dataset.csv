@@ -1,0 +1,241 @@
+text,intent
+list all files in this directory,LIST_FILES
+show me the files in the current folder,LIST_FILES
+display folder contents,LIST_FILES
+what files are in this directory?,LIST_FILES
+list files including hidden items,LIST_FILES
+show all files and directories,LIST_FILES
+display everything inside the folder,LIST_FILES
+list all items in C:\Projects,LIST_FILES
+can you show me the files here?,LIST_FILES
+print all files in the current path,LIST_FILES
+view all documents in this directory,LIST_FILES
+show directory contents in list format,LIST_FILES
+list all files sorted by name,LIST_FILES
+display items in .\subfolder,LIST_FILES
+give me a list of all files,LIST_FILES
+show files in C:\Users\Amit\Documents,LIST_FILES
+what do I have in this folder?,LIST_FILES
+reveal hidden files in current folder,LIST_FILES
+list all contents of the directory,LIST_FILES
+see all files present here,LIST_FILES
+create a new directory named Projects,CREATE_DIRECTORY
+make a folder called Test,CREATE_DIRECTORY
+create directory 'New Folder',CREATE_DIRECTORY
+make a new folder named My Documents,CREATE_DIRECTORY
+create folder Backup Data,CREATE_DIRECTORY
+make directory C:\Data\Reports,CREATE_DIRECTORY
+please create a directory named build,CREATE_DIRECTORY
+make a folder named 'Client Assets',CREATE_DIRECTORY
+create a new folder called scripts,CREATE_DIRECTORY
+set up a directory named archive,CREATE_DIRECTORY
+create folder 'Machine Learning',CREATE_DIRECTORY
+generate a folder named logs,CREATE_DIRECTORY
+make a directory at .\temp,CREATE_DIRECTORY
+create folder named Output Files,CREATE_DIRECTORY
+please make a new folder called config,CREATE_DIRECTORY
+create folder 'Financial Reports 2026',CREATE_DIRECTORY
+make directory named source,CREATE_DIRECTORY
+create a folder named experiments,CREATE_DIRECTORY
+initialize a new directory named dataset,CREATE_DIRECTORY
+create a new folder called 'Test Suite',CREATE_DIRECTORY
+delete file notes.txt,DELETE_FILE
+remove the file report.pdf,DELETE_FILE
+please delete document.docx,DELETE_FILE
+erase test.log from the directory,DELETE_FILE
+delete error.log,DELETE_FILE
+remove file C:\temp\debug.log,DELETE_FILE
+delete the file named data.csv,DELETE_FILE
+trash file old_version.zip,DELETE_FILE
+purge file temp_output.txt,DELETE_FILE
+please remove script.py,DELETE_FILE
+delete the document invoice.pdf,DELETE_FILE
+remove file 'annual report.pdf',DELETE_FILE
+delete item cache.tmp,DELETE_FILE
+remove test_output.log,DELETE_FILE
+erase the file backup.bak,DELETE_FILE
+delete file .\logs\crash.log,DELETE_FILE
+please delete image.png,DELETE_FILE
+remove file draft.txt,DELETE_FILE
+delete log file system.log,DELETE_FILE
+get rid of the file summary.docx,DELETE_FILE
+find all python files in this directory,SEARCH_FILES
+search for all .pdf documents,SEARCH_FILES
+find all files with extension .csv,SEARCH_FILES
+locate text files in the project,SEARCH_FILES
+search for *.json files,SEARCH_FILES
+find files containing the keyword error,SEARCH_FILES
+search for document named resume.docx,SEARCH_FILES
+look for all .log files in C:\Logs,SEARCH_FILES
+find all javascript files,SEARCH_FILES
+search for files ending with .py,SEARCH_FILES
+locate all images with .png extension,SEARCH_FILES
+find any file named config.json,SEARCH_FILES
+search for report.pdf in this folder,SEARCH_FILES
+where are the markdown files?,SEARCH_FILES
+look for files named notes.txt,SEARCH_FILES
+find all files with .xlsx extension,SEARCH_FILES
+search for backup files in the system,SEARCH_FILES
+locate file 'sales data.csv',SEARCH_FILES
+find all text files in subfolders,SEARCH_FILES
+search for all files matching pattern test_*.py,SEARCH_FILES
+check python version,CHECK_VERSION
+what version of git is installed?,CHECK_VERSION
+show node version,CHECK_VERSION
+check powershell version,CHECK_VERSION
+what is the installed docker version?,CHECK_VERSION
+check npm version,CHECK_VERSION
+display version of python,CHECK_VERSION
+what version of java do I have?,CHECK_VERSION
+verify git version,CHECK_VERSION
+check pip version installed,CHECK_VERSION
+show rust version,CHECK_VERSION
+what is my current gcc version?,CHECK_VERSION
+check version of go,CHECK_VERSION
+display the installed version of code,CHECK_VERSION
+check powershell build version,CHECK_VERSION
+what version of python is running?,CHECK_VERSION
+show me the git version,CHECK_VERSION
+print current nodejs version,CHECK_VERSION
+check docker version,CHECK_VERSION
+what version of dotnet is installed?,CHECK_VERSION
+what is my current directory?,CURRENT_DIRECTORY
+where am I currently located?,CURRENT_DIRECTORY
+show current working directory,CURRENT_DIRECTORY
+print working directory,CURRENT_DIRECTORY
+display current path,CURRENT_DIRECTORY
+what folder am I in right now?,CURRENT_DIRECTORY
+tell me my current location in terminal,CURRENT_DIRECTORY
+show current path,CURRENT_DIRECTORY
+display the active directory path,CURRENT_DIRECTORY
+what is the active working folder?,CURRENT_DIRECTORY
+show where I am in the file system,CURRENT_DIRECTORY
+print active directory,CURRENT_DIRECTORY
+get current directory path,CURRENT_DIRECTORY
+which folder is currently open?,CURRENT_DIRECTORY
+show present working directory,CURRENT_DIRECTORY
+tell me the current folder path,CURRENT_DIRECTORY
+display current working location,CURRENT_DIRECTORY
+what is the full path of this folder?,CURRENT_DIRECTORY
+check present directory,CURRENT_DIRECTORY
+what directory am I working in?,CURRENT_DIRECTORY
+move file report.pdf to Documents,MOVE_FILE
+move data.csv to C:\Backup,MOVE_FILE
+transfer notes.txt into Archive,MOVE_FILE
+move file script.py to .\src,MOVE_FILE
+move document.docx to 'Project Files',MOVE_FILE
+shift image.png to Assets folder,MOVE_FILE
+move invoice.pdf to C:\Users\Finance,MOVE_FILE
+relocate test.py to tests folder,MOVE_FILE
+move file summary.txt into destination folder,MOVE_FILE
+transfer archive.zip to D:\Backups,MOVE_FILE
+move log.txt to .\logs,MOVE_FILE
+move the file database.db to Storage,MOVE_FILE
+move 'annual report.pdf' to 'Archive 2026',MOVE_FILE
+relocate presentation.pptx to Slides,MOVE_FILE
+move file config.json to settings,MOVE_FILE
+shift data.xlsx to 'Financial Data',MOVE_FILE
+move old_log.txt into trash folder,MOVE_FILE
+transfer file readme.md to docs,MOVE_FILE
+move output.csv to Results,MOVE_FILE
+move file app.py to 'Production Code',MOVE_FILE
+copy file report.pdf to Backup,COPY_FILE
+duplicate notes.txt to notes_copy.txt,COPY_FILE
+copy data.csv to C:\DataBackup,COPY_FILE
+make a copy of script.py in .\backup,COPY_FILE
+copy document.docx to 'Shared Documents',COPY_FILE
+duplicate image.png to Assets,COPY_FILE
+copy invoice.pdf to C:\Archive,COPY_FILE
+copy test.py to tests directory,COPY_FILE
+make a duplicate of summary.txt,COPY_FILE
+copy archive.zip to D:\BackupData,COPY_FILE
+copy log.txt to .\logs_backup,COPY_FILE
+duplicate database.db to database_backup.db,COPY_FILE
+copy 'annual report.pdf' to 'Reports Archive',COPY_FILE
+copy file presentation.pptx to Backup folder,COPY_FILE
+clone file config.json to config_default.json,COPY_FILE
+copy data.xlsx to 'Financial Backup',COPY_FILE
+make a copy of readme.md in docs,COPY_FILE
+copy old_log.txt to backup folder,COPY_FILE
+duplicate output.csv to output_backup.csv,COPY_FILE
+copy file main.py to 'Code Backup',COPY_FILE
+show system information,SYSTEM_INFO
+display operating system details,SYSTEM_INFO
+what are my system specifications?,SYSTEM_INFO
+show computer hardware info,SYSTEM_INFO
+display system summary,SYSTEM_INFO
+tell me about this machine,SYSTEM_INFO
+view OS details and build number,SYSTEM_INFO
+show computer properties,SYSTEM_INFO
+get operating system version and architecture,SYSTEM_INFO
+display machine specs,SYSTEM_INFO
+what operating system is running?,SYSTEM_INFO
+show host name and processor info,SYSTEM_INFO
+display full system information,SYSTEM_INFO
+view memory and computer specifications,SYSTEM_INFO
+what are the hardware specs of this PC?,SYSTEM_INFO
+show system manufacturer and model,SYSTEM_INFO
+print computer system details,SYSTEM_INFO
+display Windows system details,SYSTEM_INFO
+give me the system information,SYSTEM_INFO
+inspect operating system configuration,SYSTEM_INFO
+show network configuration,NETWORK_INFO
+display my ip address,NETWORK_INFO
+check network connection details,NETWORK_INFO
+what is my ip address?,NETWORK_INFO
+show ipconfig information,NETWORK_INFO
+display all network adapters,NETWORK_INFO
+show active network interfaces,NETWORK_INFO
+check dns and ip settings,NETWORK_INFO
+show default gateway and subnet mask,NETWORK_INFO
+display local ip configuration,NETWORK_INFO
+what is my current network setup?,NETWORK_INFO
+view network adapter details,NETWORK_INFO
+show ipv4 and ipv6 addresses,NETWORK_INFO
+check network adapter status,NETWORK_INFO
+display ethernet and wifi details,NETWORK_INFO
+show ip address details,NETWORK_INFO
+print network configuration,NETWORK_INFO
+list active network connections,NETWORK_INFO
+get ip and network interface info,NETWORK_INFO
+display ipconfig details,NETWORK_INFO
+create a new file named notes.txt,CREATE_FILE
+make a file called index.html,CREATE_FILE
+create file test.py,CREATE_FILE
+generate a blank file named README.md,CREATE_FILE
+create file 'todo list.txt',CREATE_FILE
+make a new file named script.sh,CREATE_FILE
+create document report.docx,CREATE_FILE
+make a file called config.json,CREATE_FILE
+create a new file data.csv,CREATE_FILE
+generate file at .\logs\output.log,CREATE_FILE
+create file named sample.py,CREATE_FILE
+make a file called requirements.txt,CREATE_FILE
+create an empty file named styles.css,CREATE_FILE
+make a file named 'my notes.txt',CREATE_FILE
+create file C:\temp\scratch.txt,CREATE_FILE
+generate a new file named docker-compose.yml,CREATE_FILE
+create file summary.txt,CREATE_FILE
+make a new document invoice.pdf,CREATE_FILE
+create a blank file named main.py,CREATE_FILE
+generate file test_cases.py,CREATE_FILE
+play some music for me,UNKNOWN
+what is the capital of France?,UNKNOWN
+order a pepperoni pizza,UNKNOWN
+tell me a funny joke,UNKNOWN
+who won the soccer world cup?,UNKNOWN
+write a poem about artificial intelligence,UNKNOWN
+calculate 45 multiplied by 29,UNKNOWN
+translate this sentence to Spanish,UNKNOWN
+how is the weather today in New York?,UNKNOWN
+book a flight to London,UNKNOWN
+turn off the living room lights,UNKNOWN
+set an alarm for 7 am tomorrow,UNKNOWN
+recommend a good science fiction book,UNKNOWN
+send an email to my manager,UNKNOWN
+what is the stock price of Apple?,UNKNOWN
+solve this calculus integral,UNKNOWN
+open the web browser and browse reddit,UNKNOWN
+tell me what you think about consciousness,UNKNOWN
+can you sing a song for me?,UNKNOWN
+generate a recipe for chocolate cake,UNKNOWN

@@ -1,0 +1,45 @@
+{
+  "model_name": "TF-IDF + Logistic Regression Intent Classifier",
+  "algorithm": "LogisticRegression(solver='lbfgs', max_iter=2000, class_weight='balanced')",
+  "dataset_path": "D:\\AI Terminal Assistance\\data\\intents_dataset.csv",
+  "dataset_size": 240,
+  "train_samples": 192,
+  "test_samples": 48,
+  "intent_classes": [
+    "CHECK_VERSION",
+    "COPY_FILE",
+    "CREATE_DIRECTORY",
+    "CREATE_FILE",
+    "CURRENT_DIRECTORY",
+    "DELETE_FILE",
+    "LIST_FILES",
+    "MOVE_FILE",
+    "NETWORK_INFO",
+    "SEARCH_FILES",
+    "SYSTEM_INFO",
+    "UNKNOWN"
+  ],
+  "num_classes": 12,
+  "training_date": "2026-11-25T22:38:55.324427",
+  "random_state": 42,
+  "test_size": 0.2,
+  "vectorizer_config": {
+    "ngram_range": [
+      1,
+      2
+    ],
+    "sublinear_tf": true,
+    "lowercase": false,
+    "token_pattern": "\\S+",
+    "min_df": 1,
+    "vocabulary_size": 711
+  },
+  "metrics": {
+    "test_accuracy": 0.8333333333333334,
+    "macro_f1": 0.8315476190476191,
+    "weighted_f1": 0.8315476190476191,
+    "macro_precision": 0.8680555555555557,
+    "macro_recall": 0.8333333333333334
+  },
+  "confidence_threshold": 0.45
+}

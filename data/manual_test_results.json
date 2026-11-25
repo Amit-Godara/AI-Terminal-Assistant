@@ -1,0 +1,200 @@
+[
+  {
+    "test_name": "1. Current Directory",
+    "query": "show current directory",
+    "intent": "CURRENT_DIRECTORY",
+    "operation": "GET_LOCATION",
+    "risk": "LOW",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": ""
+  },
+  {
+    "test_name": "2. List Files",
+    "query": "list all files",
+    "intent": "LIST_FILES",
+    "operation": "LIST",
+    "risk": "LOW",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": ""
+  },
+  {
+    "test_name": "3. Create File (Approved)",
+    "query": "create file manual_test_doc.txt",
+    "intent": "CREATE_FILE",
+    "operation": "CREATE_FILE",
+    "risk": "MEDIUM",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": "File created"
+  },
+  {
+    "test_name": "4. Target Conflict",
+    "query": "create file manual_test_doc.txt",
+    "intent": "CREATE_FILE",
+    "operation": "CREATE_FILE",
+    "risk": "MEDIUM",
+    "actual_status": "CONFLICT_TARGET_EXISTS",
+    "expected_status": "CONFLICT_TARGET_EXISTS",
+    "passed": true,
+    "notes": "Conflict detected"
+  },
+  {
+    "test_name": "5. Create Directory (Declined)",
+    "query": "create directory declined_demo_folder",
+    "intent": "CREATE_DIRECTORY",
+    "operation": "CREATE_DIR",
+    "risk": "MEDIUM",
+    "actual_status": "CANCELLED",
+    "expected_status": "CANCELLED",
+    "passed": true,
+    "notes": "User cancelled"
+  },
+  {
+    "test_name": "6. Create Directory (Approved)",
+    "query": "create directory demo_folder",
+    "intent": "CREATE_DIRECTORY",
+    "operation": "CREATE_DIR",
+    "risk": "MEDIUM",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": "Folder created"
+  },
+  {
+    "test_name": "7. Search Files",
+    "query": "search for txt files",
+    "intent": "SEARCH_FILES",
+    "operation": "SEARCH",
+    "risk": "LOW",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": ""
+  },
+  {
+    "test_name": "8. Check Version (Python)",
+    "query": "check python version",
+    "intent": "CHECK_VERSION",
+    "operation": "CHECK_VERSION",
+    "risk": "LOW",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": ""
+  },
+  {
+    "test_name": "9. System Info",
+    "query": "show system information",
+    "intent": "SYSTEM_INFO",
+    "operation": "SYSTEM_INFO",
+    "risk": "LOW",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": ""
+  },
+  {
+    "test_name": "10. Network Info",
+    "query": "show network configuration",
+    "intent": "NETWORK_INFO",
+    "operation": "NETWORK_INFO",
+    "risk": "LOW",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": ""
+  },
+  {
+    "test_name": "11. Copy File",
+    "query": "copy manual_test_doc.txt to manual_test_doc_copy.txt",
+    "intent": "COPY_FILE",
+    "operation": "COPY",
+    "risk": "MEDIUM",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": ""
+  },
+  {
+    "test_name": "12. Move File",
+    "query": "move manual_test_doc_copy.txt to manual_test_doc_moved.txt",
+    "intent": "MOVE_FILE",
+    "operation": "MOVE",
+    "risk": "MEDIUM",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": ""
+  },
+  {
+    "test_name": "13. Delete File (Bad Token)",
+    "query": "delete file manual_test_doc.txt",
+    "intent": "DELETE_FILE",
+    "operation": "DELETE",
+    "risk": "HIGH",
+    "actual_status": "CANCELLED",
+    "expected_status": "CANCELLED",
+    "passed": true,
+    "notes": "Token mismatch"
+  },
+  {
+    "test_name": "14. Delete File (Valid Token)",
+    "query": "delete file manual_test_doc.txt",
+    "intent": "DELETE_FILE",
+    "operation": "DELETE",
+    "risk": "HIGH",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": "Permanently removed"
+  },
+  {
+    "test_name": "15. Traversal Rejection",
+    "query": "list files in ../../Windows",
+    "intent": "LIST_FILES",
+    "operation": "LIST",
+    "risk": "LOW",
+    "actual_status": "UNSAFE_PATH",
+    "expected_status": "UNSAFE_PATH",
+    "passed": true,
+    "notes": "Traversal blocked"
+  },
+  {
+    "test_name": "16. Missing Parameters",
+    "query": "move file",
+    "intent": "MOVE_FILE",
+    "operation": "MOVE",
+    "risk": "MEDIUM",
+    "actual_status": "NEEDS_CLARIFICATION",
+    "expected_status": "NEEDS_CLARIFICATION",
+    "passed": true,
+    "notes": "Clarification requested"
+  },
+  {
+    "test_name": "17. Unknown Intent",
+    "query": "tell me a joke about robots",
+    "intent": "UNKNOWN",
+    "operation": "UNKNOWN",
+    "risk": "LOW",
+    "actual_status": "UNSUPPORTED_INTENT",
+    "expected_status": "UNSUPPORTED_INTENT",
+    "passed": true,
+    "notes": "Rejected out-of-scope"
+  },
+  {
+    "test_name": "18. Semantic Paraphrase",
+    "query": "what directory am I in right now",
+    "intent": "CURRENT_DIRECTORY",
+    "operation": "GET_LOCATION",
+    "risk": "LOW",
+    "actual_status": "SUCCESS",
+    "expected_status": "SUCCESS",
+    "passed": true,
+    "notes": "Paraphrase resolved"
+  }
+]
