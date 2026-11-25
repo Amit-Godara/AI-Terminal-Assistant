@@ -406,6 +406,45 @@
 - Phase 10 implements project technology and manifest detection only.
 - Command discovery, script execution, dependency management, project file editing, and IDE extensions are intentionally not implemented in this phase.
 
+---
+
+## Phase 11: Project Intelligence Engine
+- **Date**: 2026-11-26
+- **Status**: Completed
+
+### Completed Work
+1. **Intelligence Engine Core (`core/project_analyzer.py`)**:
+   - Implemented typed Pydantic model: `ProjectAnalysisResult` containing `project_root`, `detection_result`, `project_name`, `project_version`, `project_description`, `project_structure`, `dependencies`, `development_dependencies`, `available_scripts`, `entry_points`, `build_configuration`, `test_configuration`, documented instructions, and `files_analyzed`.
+   - Created `ProjectAnalyzer` reusing `ProjectDetector` to perform deep read-only inspection without duplicating detection logic.
+   - Strictly enforced read-only execution: no scripts executed, no dependency installations, no compilers invoked, no Docker containers started.
+   - Enforced strict secret protection: `.env` and credential files are NEVER opened or parsed.
+2. **Project Structure & Directory Tree Analysis**:
+   - Configurable depth and entry ceiling skipping dependency and build directories (`node_modules`, `.venv`, etc.).
+   - Discovers source directories (`src`, `app`, `lib`, `backend`, `frontend`), test directories (`tests`, `test`, `spec`), doc directories (`docs`), config files, and common entry point files (`app.py`, `index.ts`, `main.py`).
+3. **Manifest Intelligence Parsers**:
+   - **Python**: `pyproject.toml` (via stdlib `tomllib`), `requirements.txt`, `Pipfile`, `setup.cfg`, and regex-based `setup.py` (never imported or executed). Extracts dependencies, dev dependencies, build backend, Python version constraints, and scripts.
+   - **JavaScript / TypeScript**: `package.json` (name, version, main, module, dependencies, devDependencies, exact script definitions). Scripts are surfaced as data only and never executed. `tsconfig.json` compiler options.
+   - **Java**: `pom.xml` (`xml.etree.ElementTree` parsing artifactId, version, dependencies) and `build.gradle` (regex dependency extraction).
+   - **C / C++**: `CMakeLists.txt` (project name, executable targets) and `Makefile` (target extraction).
+   - **Flutter / Dart**: `pubspec.yaml` (name, version, description, dependencies, Flutter SDK flags).
+   - **.NET**: `*.csproj` (target framework, package references).
+   - **Docker**: `Dockerfile` (base images, exposed ports) and `docker-compose.yml` / `compose.yaml` (services, images).
+4. **README Intelligence**:
+   - Reads `README.md`, `README.rst`, `README.txt`.
+   - Extracts project description, installation instructions, usage/run commands, and testing guidance.
+   - Treats all documentation as untrusted data to protect against prompt-injection.
+5. **Testing & Verification (`tests/test_project_analyzer.py`)**:
+   - Implemented 20 test cases covering manifest extraction across all technologies, scripts, structure, full-stack polyglot, malformed JSON/TOML/YAML, file-size limits, symlink boundaries, permission errors, no-mutation, and secret protection.
+   - Test results: 19 passed, 1 skipped (Windows non-admin symlink privilege).
+6. **Full Multi-Phase Regression Verification**:
+   - Total test suite count increased from 210 to **230 collected items**.
+   - Full regression outcome: **227 passed, 3 skipped, 3 warnings in 143.56s**. Zero regressions across Phases 1–11.
+
+### Scope Boundary Notice
+- Phase 11 implements static project intelligence, manifest analysis, and structure discovery only.
+- Automatic integration into normal terminal execution, natural-language project command discovery, script execution, and dependency installation are intentionally reserved for subsequent phases.
+
+
 
 
 

@@ -55,7 +55,8 @@ AI-Terminal-Assistant/
 │   ├── command_generator.py    # Controlled PowerShell template builder
 │   ├── command_validator.py    # Allowlist & safety checks
 │   ├── executor.py             # Controlled subprocess execution
-│   └── project_detector.py     # Read-only software project & technology detector
+│   ├── project_detector.py     # Read-only software project & technology detector
+│   └── project_analyzer.py     # Read-only project intelligence & manifest analyzer
 │
 ├── utils/
 │   ├── __init__.py
@@ -74,7 +75,8 @@ AI-Terminal-Assistant/
 │   ├── test_command_validator.py# Security validation & path safety tests (18 tests)
 │   ├── test_executor.py         # Controlled execution & safety tests (34 tests)
 │   ├── test_terminal_integration.py # End-to-end integration & UI tests (18 tests)
-│   └── test_project_detector.py # Project detection & technology tests (25 tests)
+│   ├── test_project_detector.py # Project detection & technology tests (25 tests)
+│   └── test_project_analyzer.py # Project intelligence & manifest tests (20 tests)
 │
 └── scripts/
     ├── train_model.py          # Model training, evaluation & verification pipeline
@@ -264,6 +266,28 @@ The end-to-end flow executes:
 | `$help` | Display interactive command reference and safety policies | `$help` |
 | `$exit` / `quit` | Exit the assistant cleanly without traceback | `$exit` |
 
+## Project Detection Engine (Phase 10)
+
+### Purpose & Architecture
+Phase 10 introduces the **Project Detection Engine** (`core/project_detector.py`), an extensible, strictly read-only scanner that detects software technologies, build systems, package managers, frameworks, and monorepos from project directories.
+
+Key capabilities:
+- **8 Core Technology Stacks**: Python, JavaScript/TypeScript, Java, C/C++, Flutter/Dart, .NET, Docker/Infrastructure, and Git/Monorepo setups.
+- **Manifest-Based Detection**: Recognizes `pyproject.toml`, `requirements.txt`, `package.json`, `pom.xml`, `build.gradle`, `CMakeLists.txt`, `pubspec.yaml`, `*.csproj`, `Dockerfile`, and more.
+- **Strict Read-Only & Security Isolation**: Performs no execution, package installation, or file modification. Enforces symlink boundaries (skips symlinks resolving outside the root) and directory exclusions (`node_modules`, `.git`, `.venv`, `dist`, `build`, `target`).
+
+## Project Intelligence Engine (Phase 11)
+
+### Purpose & Architecture
+Phase 11 extends the assistant with the **Project Intelligence Engine** (`core/project_analyzer.py`), which performs deep read-only inspection of project structure, configuration files, manifests, dependencies, scripts, entry points, and documentation.
+
+Key capabilities:
+- **Manifest Intelligence**: Parses project metadata, dependencies, devDependencies, and build configurations across Python (`pyproject.toml`, `requirements.txt`, `Pipfile`, `setup.cfg`, `setup.py` regex parsing), Node (`package.json`, `tsconfig.json`), Java (`pom.xml`, `build.gradle`), C/C++ (`CMakeLists.txt`, `Makefile`), Flutter (`pubspec.yaml`), .NET (`*.csproj`), and Docker (`Dockerfile`, `docker-compose.yml`).
+- **Safe Script Extraction**: Extracts exact script definitions (e.g. `npm run dev`, `test`, `build`) strictly as data/strings without executing them.
+- **Structure Discovery**: Detects source, test, and documentation directories, identifies entry points (`app.py`, `index.ts`, `main.py`), and constructs a depth-limited directory tree.
+- **Safe README Analysis**: Extracts project descriptions, installation instructions, usage, and test commands from markdown/rst/txt files while sanitizing untrusted inputs against prompt injection.
+- **Strict Secret Protection**: Never opens or reads `.env*`, `*secret*`, `*credential*`, `*.pem`, `*.key`, or SSH key files.
+
 ## Quickstart & Execution
 
 ### 1. Activate the Python Environment
@@ -285,7 +309,7 @@ python app.py --query "check python version"
 python app.py --query "list all files"
 ```
 
-### 4. Run the Complete Test Suite (208 Passed, 2 Skipped Across All 10 Phases)
+### 4. Run the Complete Test Suite (227 Passed, 3 Skipped Across All 11 Phases)
 ```powershell
 python -m pytest tests/ -v
 ```
@@ -306,7 +330,7 @@ Comprehensive technical and presentation deliverables are available in the proje
 - [`FINAL_PROJECT_REPORT.md`](file:///d:/AI%20Terminal%20Assistance/FINAL_PROJECT_REPORT.md): Complete 23-section technical report with Mermaid architecture diagrams, NLP algorithms, and experimental results.
 - [`PRESENTATION_GUIDE.md`](file:///d:/AI%20Terminal%20Assistance/PRESENTATION_GUIDE.md): 12-slide presentation structure with slide bullet points, suggested graphics, and detailed speaker notes.
 - [`LIVE_DEMO_GUIDE.md`](file:///d:/AI%20Terminal%20Assistance/LIVE_DEMO_GUIDE.md): Step-by-step 9-part live demonstration script with exact commands and expected terminal cards.
-- [`DEVELOPMENT_LOG.md`](file:///d:/AI%20Terminal%20Assistance/DEVELOPMENT_LOG.md): Chronological engineering log across all 9 development phases.
+- [`DEVELOPMENT_LOG.md`](file:///d:/AI%20Terminal%20Assistance/DEVELOPMENT_LOG.md): Chronological engineering log across all 11 development phases.
 
 ## Security & Operational Limitations
 
