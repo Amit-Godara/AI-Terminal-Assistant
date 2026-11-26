@@ -427,22 +427,115 @@
    - **Java**: `pom.xml` (`xml.etree.ElementTree` parsing artifactId, version, dependencies) and `build.gradle` (regex dependency extraction).
    - **C / C++**: `CMakeLists.txt` (project name, executable targets) and `Makefile` (target extraction).
    - **Flutter / Dart**: `pubspec.yaml` (name, version, description, dependencies, Flutter SDK flags).
-   - **.NET**: `*.csproj` (target framework, package references).
+   - **.NET**: `*.csproj`, `*.fsproj` (target framework, package references), and `*.sln` (solution projects).
+   - **C / C++**: `CMakeLists.txt` (project name, executable targets), `Makefile` (targets), and `meson.build` (project name, executable targets).
    - **Docker**: `Dockerfile` (base images, exposed ports) and `docker-compose.yml` / `compose.yaml` (services, images).
 4. **README Intelligence**:
    - Reads `README.md`, `README.rst`, `README.txt`.
    - Extracts project description, installation instructions, usage/run commands, and testing guidance.
    - Treats all documentation as untrusted data to protect against prompt-injection.
 5. **Testing & Verification (`tests/test_project_analyzer.py`)**:
-   - Implemented 20 test cases covering manifest extraction across all technologies, scripts, structure, full-stack polyglot, malformed JSON/TOML/YAML, file-size limits, symlink boundaries, permission errors, no-mutation, and secret protection.
-   - Test results: 19 passed, 1 skipped (Windows non-admin symlink privilege).
+   - Implemented 21 test cases covering manifest extraction across all technologies, scripts, structure, full-stack polyglot, malformed JSON/TOML/YAML, file-size limits, symlink boundaries, permission errors, no-mutation, and secret protection.
+   - Test results: 20 passed, 1 skipped (Windows non-admin symlink privilege).
 6. **Full Multi-Phase Regression Verification**:
-   - Total test suite count increased from 210 to **230 collected items**.
-   - Full regression outcome: **227 passed, 3 skipped, 3 warnings in 143.56s**. Zero regressions across Phases 1–11.
+   - Total test suite count increased from 210 to **231 collected items**.
+   - Full regression outcome: **228 passed, 3 skipped, 3 warnings in 68.44s**. Zero regressions across Phases 1–11.
 
 ### Scope Boundary Notice
 - Phase 11 implements static project intelligence, manifest analysis, and structure discovery only.
 - Automatic integration into normal terminal execution, natural-language project command discovery, script execution, and dependency installation are intentionally reserved for subsequent phases.
+
+---
+
+## Phase 12: Natural-Language Project Command Discovery Engine
+- **Date**: 2026-11-26
+- **Status**: Completed
+
+### Completed Work
+1. **Command Discovery Engine (`core/project_command_engine.py`)**:
+   - Implemented typed Pydantic models: `ProjectCommandRecommendation`, `RecommendedCommand`, `SubprojectInfo`, and enums `ProjectTask`, `EvidenceCategory` (`PROJECT_DEFINED`, `DOCUMENTED`, `CONVENTIONAL`, `INFERRED`), and `CommandRiskLevel` (`LOW`, `MEDIUM`, `HIGH`).
+   - Reused `TextPreprocessor` (`core/preprocessor.py`) with TF-IDF cosine similarity and deterministic phrase scoring to classify natural-language requests across 11 `ProjectTask` categories (`INSTALL_DEPENDENCIES`, `RUN_PROJECT`, `START_BACKEND`, `START_FRONTEND`, `RUN_TESTS`, `BUILD_PROJECT`, `TRAIN_MODEL`, `LIST_AVAILABLE_SCRIPTS`, `CHECK_PROJECT_CONFIGURATION`, `DEBUG_STARTUP`, `UNKNOWN_PROJECT_TASK`).
+   - Reused Phase 10 (`ProjectDetectionResult`) and Phase 11 (`ProjectAnalysisResult`) without duplicating detection or parsing logic.
+2. **Ecosystem & Monorepo Intelligence**:
+   - **Python**: `pip`, `pipenv`, `poetry`, `pytest`, `unittest` (no pytest assumed without evidence), `manage.py`, `main.py`/`app.py` entry points.
+   - **JavaScript / TypeScript**: Strict script verification (only recommends `dev`/`start`/`test`/`build` if declared in `package.json`), lockfile-aware package manager selection (`npm`, `pnpm`, `yarn`, `bun`).
+   - **Java**: Maven (`mvn` / `mvnw.cmd`) and Gradle (`gradle` / `gradlew.bat`) wrapper detection.
+   - **C / C++**: CMake (`cmake -B build && cmake --build build`), Make, and Meson.
+   - **Flutter / Dart, .NET, Docker, ML Workflows**: Evidence-backed commands for `pubspec.yaml`, `.csproj`/`.fsproj`/`.sln`, `Dockerfile`/`docker-compose.yml`, and ML training scripts (`train.py`, `train_model.py`) without inventing CLI arguments.
+   - **Monorepo & Full-Stack Disambiguation**: Distinguishes `backend/` vs `frontend/` subprojects, selects exact subproject working directories, and prompts for clarification when requests are ambiguous.
+3. **Security & Risk Controls**:
+   - `execution_allowed` is strictly enforced as `False` via Pydantic validation; zero subprocess or filesystem-mutating operations exist.
+   - Path traversal (`..`) and external working directories outside `authorized_project_root` are rejected.
+   - Arbitrary project-defined scripts (`package.json`, `Makefile`, etc.) are classified as `MEDIUM` or `HIGH` risk with explicit warnings.
+   - Prompt-injection and destructive shell patterns in untrusted READMEs are flagged and excluded.
+4. **Testing & Verification (`tests/test_project_command_engine.py`)**:
+   - Implemented 32 unit and security tests covering all supported ecosystems, monorepo disambiguation, ambiguity/unknown handling, evidence categories, risk levels, prompt-injection defense, path traversal rejection, and mocked no-execution guarantees.
+   - Test results: **32 passed, 0 failed**.
+5. **Full Multi-Phase Regression Verification**:
+   - Total test suite count increased from 231 to **263 collected items**.
+   - Full regression outcome: **260 passed, 3 skipped, 3 warnings in 76.92s**. Zero regressions across Phases 1–12.
+
+### Scope Boundary Notice
+- Phase 12 is strictly a recommendation engine (`execution_allowed` is always `False`).
+- Interactive approval workflows, automatic terminal integration, FastAPI services, VS Code extensions, and command execution are reserved for subsequent phases.
+
+---
+
+## Phase 13: Controlled Project Command Execution Engine
+- **Date**: 2026-11-26
+- **Status**: Completed
+
+### Completed Work
+1. **Execution Engine Core (`core/project_execution_engine.py`)**:
+   - Implemented typed Pydantic models and enums: `ProjectExecutionRequest`, `ExecutionPreview`, `ExecutionApproval`, `ProjectExecutionResult`, `ExecutionStatus`, and `ExecutionRiskLevel`.
+   - Enforces a strict two-stage workflow: `prepare_execution(recommendation, authorized_project_root)` creates a cryptographically hashed, expiring preview without executing anything, and `execute(preview, approval)` requires an explicit, bound, unexpired, one-time-use `ExecutionApproval`.
+2. **Structured Command Parsing & Executable Policy**:
+   - Converts commands into structured `[executable, *arguments]` arrays and executes via `subprocess.run(..., shell=False, env=safe_env, timeout=...)`.
+   - Rejects unsafe shell syntax (`&&`, `||`, `|`, `;`, `>`, `<`, `$()`, `` ` ``, `${...}`, multiline expressions) without silently stripping characters.
+   - Blocks shell interpreters (`cmd.exe`, `powershell`, `pwsh`, `bash`, `sh`, `wsl`) and unsafe Windows batch launchers (`.bat`, `.cmd`) that implicitly invoke `cmd.exe`.
+   - Enforces an explicit executable allowlist policy (`python`, `node`, `npm`, `pnpm`, `yarn`, `bun`, `git`, `mvn`, `gradle`, `cmake`, `make`, `meson`, `flutter`, `dart`, `dotnet`, `docker`, `pytest`, etc.).
+3. **Risk Classification, Boundaries & Secret Protection**:
+   - **HIGH-risk blocking**: Destructive, migration, reset, cleanup, and deployment operations are blocked by default and cannot be bypassed by simple approval.
+   - **Project-defined code warnings**: Scripts in `package.json`, Python entry points, and build tools are flagged with `executes_project_code=True` and explicit warnings.
+   - **Boundary revalidation**: Immediately revalidates `authorized_project_root`, `working_directory`, symlinks, and protected Windows system paths before spawning any child process.
+   - **Environment & Output Controls**: Strips secret-like environment variables (`*KEY*`, `*SECRET*`, `*TOKEN*`, `*PASSWORD*`), never loads `.env` files, enforces output truncation (`65536` chars), and redacts secret patterns from captured stdout/stderr and audit logs.
+4. **Audit Logging Integration (`utils/history.py`)**:
+   - Logs all `COMPLETED`, `FAILED`, `TIMED_OUT`, `REJECTED`, and `BLOCKED` attempts to `HistoryManager` with redacted error summaries and full compatibility with existing `$history` readers.
+5. **Testing & Verification (`tests/test_project_execution_engine.py`)**:
+   - Implemented 44 unit, security, and controlled-execution tests using temporary directories and real safe child Python processes.
+   - Test results: **43 passed, 1 skipped** (Windows non-admin symlink privilege).
+6. **Full Multi-Phase Regression Verification**:
+   - Total test suite count increased from 263 to **307 collected items**.
+   - Full regression outcome: **303 passed, 4 skipped, 3 warnings in 165.01s**. Zero regressions across Phases 1–13.
+
+### Scope Boundary Notice
+- `shell=False` is not an OS-level sandbox; approved project-defined scripts execute local project code.
+- Autonomous execution, FastAPI services, VS Code extensions, and remote execution remain out of scope.
+
+---
+
+## Phase 13.1: Execution Security Hardening and Independent Verification
+- **Date**: 2026-11-26
+- **Status**: Completed
+
+### Verified Weaknesses & Hardening Fixes
+1. **Approval Authentication (`hmac` + Trusted Callback Boundary)**:
+   - Separated public preview integrity (`preview_hash` SHA-256) from user approval authentication (`approval_token` HMAC-SHA256 keyed by an instance-private 256-bit `secrets.token_bytes(32)` secret).
+   - Added `authorize_preview(preview, user_confirm_callback)` and `require_trusted_callback` enforcement so forged `ExecutionApproval` payloads constructed from public `preview_hash` values are rejected.
+2. **Executable Resolution & Anti-PATH-Hijacking**:
+   - Explicitly resolves bare allowlisted executables from trusted `PATH` directories (excluding `.`, `""`, and project directories) and passes the resolved absolute path to `subprocess.Popen`.
+   - Detects and blocks executable shadowing (e.g., malicious `python.exe` placed inside the project root or working directory) and sets `NoDefaultCurrentDirectoryInExePath=1` on Windows.
+3. **Genuinely Memory-Bounded Streaming Capture**:
+   - Replaced `subprocess.run(capture_output=True)` with `subprocess.Popen` and dual daemon `threading.Thread` readers enforcing independent `max_output_chars` caps for `stdout` and `stderr` while draining pipes to EOF to prevent deadlocks.
+4. **Windows Process-Tree Termination (Job Objects)**:
+   - Added `_WindowsJobObject` (`CreateJobObjectW`, `JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE`, `AssignProcessToJobObject`, `TerminateJobObject`) to terminate child process trees on timeout, recording any Job Object assignment/termination warnings in `result.warnings` and the audit log.
+5. **Environment & Secret Redaction Verification**:
+   - Verified `PATH` and `SystemRoot` preservation alongside secret-variable stripping (`*KEY*`, `*SECRET*`, `*TOKEN*`, `*PASSWORD*`, `*CREDENTIAL*`, `*AUTH*`, `*PRIVATE*`). Documented that substring/regex filtering is defense-in-depth and cannot guarantee detection of all possible secrets.
+6. **Testing (`tests/test_project_execution_engine.py`)**:
+   - Extended suite from 44 to **51 tests**: **50 passed, 1 skipped** (Windows non-admin symlink privilege).
+7. **Full Multi-Phase Regression Verification**:
+   - Total test suite count: **314 collected items**.
+   - Full regression outcome: **310 passed, 4 skipped, 3 warnings in 427.70s**. Zero regressions across Phases 1–13.1.
 
 
 

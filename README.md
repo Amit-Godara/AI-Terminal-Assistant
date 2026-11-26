@@ -56,7 +56,9 @@ AI-Terminal-Assistant/
 │   ├── command_validator.py    # Allowlist & safety checks
 │   ├── executor.py             # Controlled subprocess execution
 │   ├── project_detector.py     # Read-only software project & technology detector
-│   └── project_analyzer.py     # Read-only project intelligence & manifest analyzer
+│   ├── project_analyzer.py     # Read-only project intelligence & manifest analyzer
+│   ├── project_command_engine.py # Natural-language project command discovery engine
+│   └── project_execution_engine.py # Approval-gated controlled project execution engine
 │
 ├── utils/
 │   ├── __init__.py
@@ -76,7 +78,9 @@ AI-Terminal-Assistant/
 │   ├── test_executor.py         # Controlled execution & safety tests (34 tests)
 │   ├── test_terminal_integration.py # End-to-end integration & UI tests (18 tests)
 │   ├── test_project_detector.py # Project detection & technology tests (25 tests)
-│   └── test_project_analyzer.py # Project intelligence & manifest tests (20 tests)
+│   ├── test_project_analyzer.py # Project intelligence & manifest tests (21 tests)
+│   ├── test_project_command_engine.py # Project command discovery tests (32 tests)
+│   └── test_project_execution_engine.py # Controlled project execution & hardening tests (51 tests)
 │
 └── scripts/
     ├── train_model.py          # Model training, evaluation & verification pipeline
@@ -288,6 +292,40 @@ Key capabilities:
 - **Safe README Analysis**: Extracts project descriptions, installation instructions, usage, and test commands from markdown/rst/txt files while sanitizing untrusted inputs against prompt injection.
 - **Strict Secret Protection**: Never opens or reads `.env*`, `*secret*`, `*credential*`, `*.pem`, `*.key`, or SSH key files.
 
+## Project Command Discovery Engine (Phase 12)
+
+### Purpose & Architecture
+Phase 12 introduces the **Natural-Language Project Command Discovery Engine** (`core/project_command_engine.py`), which maps natural-language project questions (e.g., *"How do I run this project?"*, *"Start the backend"*, *"Run tests"*) to evidence-backed, working-directory-aware command recommendations.
+
+**Strict Non-Execution Policy**: Phase 12 **only recommends commands and never executes them** (`execution_allowed` is permanently `False`).
+
+### Supported Task Categories
+- `INSTALL_DEPENDENCIES`, `RUN_PROJECT`, `START_BACKEND`, `START_FRONTEND`, `RUN_TESTS`, `BUILD_PROJECT`, `TRAIN_MODEL`, `LIST_AVAILABLE_SCRIPTS`, `CHECK_PROJECT_CONFIGURATION`, `DEBUG_STARTUP`, `UNKNOWN_PROJECT_TASK`
+
+### Evidence, Confidence & Risk Model
+- **Evidence Categories**: `PROJECT_DEFINED` (declared scripts/manifests), `DOCUMENTED` (README instructions), `CONVENTIONAL` (standard ecosystem tooling), and `INFERRED` (requires user confirmation, e.g., ML training entry points).
+- **Monorepo & Full-Stack Awareness**: Distinguishes `backend/` and `frontend/` subprojects, selects the exact subproject working directory, and requests clarification when requests are ambiguous.
+- **Risk Classification**:
+  - `LOW`: Read-only configuration/status checks.
+  - `MEDIUM`: Dependency installation, tests, building, starting services, and project-defined scripts (always flagged with arbitrary-code warnings).
+  - `HIGH`: Destructive, cleanup, migration, or deployment scripts (`migrate`, `reset`, `clean`, `deploy`).
+- **Known Limitations**: Static recommendation only; does not inspect runtime environment variables or execute commands.
+
+## Controlled Project Command Execution Engine (Phase 13)
+
+### Purpose & Architecture
+Phase 13 introduces the **Controlled Project Command Execution Engine** (`core/project_execution_engine.py`), allowing users to execute Phase 12 recommendations only after explicit review and bound one-time-use approval.
+
+### Execution & Approval Workflow
+1. **Preview Generation (`prepare_execution`)**: Validates the Phase 12 recommendation, authorized project root, working directory, structured `[executable, *arguments]` array, executable allowlist policy, and risk level, producing a SHA-256-bound, expiring `ExecutionPreview`. Blocks PATH hijacking and project-local executable shadowing.
+2. **Explicit Authenticated One-Time Approval (`authorize_preview` / `ExecutionApproval`)**: Distinguishes public preview integrity (`preview_hash`) from user authentication (`approval_token` HMAC-SHA256 keyed by an engine-private secret). Binds strictly to exact `executable`, `arguments`, `working_directory`, `authorized_project_root`, `risk_level`, and `preview_hash`. Forged, expired, reused, generic, or tampered approvals are rejected.
+3. **Bounded Streaming Execution & Process-Tree Cleanup (`execute`)**: Revalidates all filesystem and policy boundaries immediately before invoking `subprocess.Popen(..., shell=False, env=safe_env)` with resolved executable paths, independent memory-bounded `stdout`/`stderr` streaming threads, and Windows Job Object (`_WindowsJobObject`) process-tree termination on timeout. Unsafe shell operators (`&&`, `||`, `|`, `;`, `>`, `<`, `$()`, `` ` ``), shell interpreters (`cmd.exe`, `powershell`, `bash`), and unsafe Windows `.bat`/`.cmd` launchers are rejected.
+4. **Risk & Environment Controls**: `HIGH`-risk operations (migrations, resets, deletions, deployments) are blocked by default. Secret-like environment variables are stripped (note: substring filtering and regex redaction are defense-in-depth and cannot guarantee detection of every secret), `.env` files are never auto-loaded, `NoDefaultCurrentDirectoryInExePath=1` is set on Windows, and secrets are redacted from outputs and audit logs (`utils/history.py`).
+
+### Security & Windows Limitations
+- **Not an OS-Level Sandbox**: `subprocess.run(shell=False)` prevents shell injection, but does not isolate child processes inside an OS container or VM. Approved project-defined scripts (`npm run dev`, `python train.py`) execute local project code and are explicitly flagged with warnings.
+- **Windows Batch Launchers**: `.bat` and `.cmd` files implicitly invoke `cmd.exe` on Windows even under `shell=False` and are therefore rejected by the executable policy.
+
 ## Quickstart & Execution
 
 ### 1. Activate the Python Environment
@@ -309,7 +347,7 @@ python app.py --query "check python version"
 python app.py --query "list all files"
 ```
 
-### 4. Run the Complete Test Suite (227 Passed, 3 Skipped Across All 11 Phases)
+### 4. Run the Complete Test Suite (310 Passed, 4 Skipped Across All 13 Phases)
 ```powershell
 python -m pytest tests/ -v
 ```
@@ -330,7 +368,7 @@ Comprehensive technical and presentation deliverables are available in the proje
 - [`FINAL_PROJECT_REPORT.md`](file:///d:/AI%20Terminal%20Assistance/FINAL_PROJECT_REPORT.md): Complete 23-section technical report with Mermaid architecture diagrams, NLP algorithms, and experimental results.
 - [`PRESENTATION_GUIDE.md`](file:///d:/AI%20Terminal%20Assistance/PRESENTATION_GUIDE.md): 12-slide presentation structure with slide bullet points, suggested graphics, and detailed speaker notes.
 - [`LIVE_DEMO_GUIDE.md`](file:///d:/AI%20Terminal%20Assistance/LIVE_DEMO_GUIDE.md): Step-by-step 9-part live demonstration script with exact commands and expected terminal cards.
-- [`DEVELOPMENT_LOG.md`](file:///d:/AI%20Terminal%20Assistance/DEVELOPMENT_LOG.md): Chronological engineering log across all 11 development phases.
+- [`DEVELOPMENT_LOG.md`](file:///d:/AI%20Terminal%20Assistance/DEVELOPMENT_LOG.md): Chronological engineering log across all 13 development phases.
 
 ## Security & Operational Limitations
 
